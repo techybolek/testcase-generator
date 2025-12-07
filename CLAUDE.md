@@ -23,6 +23,11 @@ npm install                 # Install dependencies
 npx playwright install      # Install browsers if needed
 ```
 
+### Non-Interactive Automation
+```bash
+./create-testcase.sh BUSINESS_SCENARIOS/altstars-booking.txt  # Run full workflow headless
+```
+
 ## Custom Slash Commands
 
 | Command | Purpose |
@@ -30,6 +35,7 @@ npx playwright install      # Install browsers if needed
 | `/plan-testcase <URL>` | Navigate to URL, explore page with Playwright MCP, create detailed test plan in `test_plans/` |
 | `/generate-test <plan-file>` | Convert test plan to TypeScript, execute with Chromium, auto-fix failures (max 3 retries) |
 | `/chunk-testplan <plan-file>` | Split large test plans (>6 independent test cases) into chunks in `test_plans/chunked/<group>/` |
+| `/full-testcase <URL>` | Run complete workflow: plan → generate → execute with context isolation between phases |
 
 ## Architecture
 

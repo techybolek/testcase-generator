@@ -14,5 +14,9 @@
   "devDependencies": {
     "@playwright/test": "^1.57.0",
     "dotenv": "^17.2.3"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "pptxgenjs": "^4.0.1"
   }
 }
