@@ -1,0 +1,1 @@
+go to https://customer-portal-flame-seven.vercel.app log in and book and an appointment for mens, 2 pieces. USe credentials stored in .env

@@ -1,4 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 export default defineConfig({
   testDir: './tests',
@@ -9,7 +13,6 @@ export default defineConfig({
   reporter: 'html',
   timeout: 60000, // 60 second timeout per test
   use: {
-    baseURL: 'https://www.cgi.com',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

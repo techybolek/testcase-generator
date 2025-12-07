@@ -139,7 +139,7 @@ After generating the test file:
      - Fix the test code (adjust selectors, waits, assertions, etc.)
      - Save the updated test file
      - Re-run the test
-     - Repeat until the test passes (maximum 3 retry attempts)
+     - Repeat until the test passes
 
 5. **Final Report**:
    - Confirm the test passed with Chromium

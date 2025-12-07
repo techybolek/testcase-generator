@@ -112,6 +112,7 @@ Use this structure:
 
 ## Tips
 
+- **Never hardcode credentials** - Use environment variables (`LOGIN_USER`, `LOGIN_PASSWORD`, etc.) for any sensitive data. Reference them in test plans as `ENV_VAR:LOGIN_USER` format.
 - Be thorough but pragmatic - focus on the happy path first
 - Note any dynamic elements (IDs that change, timestamps, etc.)
 - Identify potential wait conditions (loading spinners, async operations)
@@ -120,7 +121,7 @@ Use this structure:
 
 ## Example Workflow
 
-1. User: "Plan a test for login functionality on https://example.com"
+1. User: "Test the login functionality on https://example.com"
 2. You: Navigate to the URL, take a snapshot
 3. You: Identify login form elements (username, password, submit button)
 4. You: Document each step (enter username, enter password, click submit)

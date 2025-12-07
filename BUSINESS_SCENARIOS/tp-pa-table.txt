@@ -1,0 +1,1 @@
+go to https://www.recovery.pr/en then Finances->Table View. Select 'Obligated Projects'. Sort by pw number, make sure rows sorted correctly.
