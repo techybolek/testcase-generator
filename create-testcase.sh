@@ -50,7 +50,7 @@ COMMAND_CONTENT=$(cat "$FULL_CMD" | sed "s|\$ARGUMENTS|$URL|g")
 
 # Run Claude Code non-interactively with the command content as prompt
 # Append the business scenario as a "user response" to skip the interactive question
-claude -p "$COMMAND_CONTENT
+OUTPUT=$(claude -p "$COMMAND_CONTENT
 
 ---
 
@@ -60,4 +60,30 @@ $SCENARIO_CONTENT
 Proceed with the workflow without asking for clarification." \
     --dangerously-skip-permissions \
     --verbose \
-    --output-format text
+    --output-format text)
+
+# Display full output
+echo "$OUTPUT"
+
+# Extract test file path from the final report table
+TEST_FILE=$(echo "$OUTPUT" | grep -E "\| *Test File" | sed 's/.*| *\([^ |]*\.spec\.ts\).*/\1/' | head -1)
+
+# Extract status (PASSED/FAILED)
+STATUS=$(echo "$OUTPUT" | grep -E "\| *Status" | grep -oE "PASSED|FAILED" | head -1)
+
+echo ""
+echo "========================================"
+echo "SUMMARY"
+echo "========================================"
+echo "Generated Test File: ${TEST_FILE:-Not found}"
+echo "Status: ${STATUS:-Unknown}"
+echo "========================================"
+
+# Exit with appropriate code
+if [ "$STATUS" = "PASSED" ]; then
+    exit 0
+elif [ "$STATUS" = "FAILED" ]; then
+    exit 1
+else
+    exit 0
+fi
