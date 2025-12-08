@@ -1,22 +1,31 @@
 #!/bin/bash
 set -e
 
-# Usage: ./run-testcase.sh BUSINESS_SCENARIOS/altstars-booking.txt
+# Usage: ./create-testcase.sh <scenario-file-or-content>
 # Invokes Claude Code with the /full-testcase command non-interactively
+# Input can be a file path or direct business scenario content
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ -z "$1" ]; then
-    echo "Usage: $0 <scenario-file>"
-    echo "Example: $0 BUSINESS_SCENARIOS/altstars-booking.txt"
+    echo "Usage: $0 <scenario-file-or-content>"
+    echo "Examples:"
+    echo "  $0 BUSINESS_SCENARIOS/scenario.txt"
+    echo "  $0 \"https://example.com - User logs in and views dashboard\""
     exit 1
 fi
 
-SCENARIO_FILE="$1"
+INPUT="$1"
 
-if [ ! -f "$SCENARIO_FILE" ]; then
-    echo "Error: File not found: $SCENARIO_FILE"
-    exit 1
+# Detect if input is a file or direct content
+if [ -f "$INPUT" ]; then
+    echo "Input mode: File"
+    SCENARIO_CONTENT=$(cat "$INPUT")
+    INPUT_DISPLAY="$INPUT"
+else
+    echo "Input mode: Direct content"
+    SCENARIO_CONTENT="$INPUT"
+    INPUT_DISPLAY="(inline)"
 fi
 
 # Verify command file exists
@@ -27,8 +36,7 @@ if [ ! -f "$FULL_CMD" ]; then
     exit 1
 fi
 
-# Read scenario content (this becomes the business scenario)
-SCENARIO_CONTENT=$(cat "$SCENARIO_FILE")
+# SCENARIO_CONTENT is already set above based on input mode
 
 # Extract URL (first https:// URL in the file)
 URL=$(echo "$SCENARIO_CONTENT" | grep -oE 'https?://[^ ]+' | head -1)
@@ -41,7 +49,7 @@ fi
 echo "========================================"
 echo "Running full testcase workflow"
 echo "URL: $URL"
-echo "Scenario: $SCENARIO_FILE"
+echo "Scenario: $INPUT_DISPLAY"
 echo "========================================"
 
 # Read the command file and substitute $ARGUMENTS with the URL
