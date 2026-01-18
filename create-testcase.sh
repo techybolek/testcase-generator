@@ -5,6 +5,8 @@ set -e
 # Invokes Claude Code with the /full-testcase command non-interactively
 # Input can be a file path or direct business scenario content
 
+unset ANTHROPIC_API_KEY
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ -z "$1" ]; then
