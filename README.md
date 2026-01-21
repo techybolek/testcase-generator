@@ -14,12 +14,12 @@ npx playwright install
 ### 2. Install Playwright MCP Server
 
 ```bash
-claude mcp add playwright -- npx @anthropic-ai/mcp-server-playwright
+claude mcp add playwright npx @playwright/mcp@latest
 ```
 
 ### 3. Configure Headed Mode
 
-The MCP server must run with a visible browser (headed, not headless). Add to your Claude Code MCP config (`~/.claude/mcp.json`):
+For best results the MCP server should run with a visible browser (headed, not headless). Add to your Claude Code MCP config (`~/.claude/mcp.json`):
 
 ```json
 {
@@ -38,10 +38,16 @@ Use Claude Code slash commands to generate tests:
 
 | Command | Description |
 |---------|-------------|
-| `/plan-testcase <URL>` | Explore page and create test plan |
-| `/generate-testcase <plan>` | Generate and execute TypeScript test |
-| `/full-testcase <URL>` | Complete workflow: plan → generate → execute |
-| `/chunk-testplan <plan>` | Split large plans into smaller chunks |
+| `/plan-testcase <scenario>` | Explore page and create test plan |
+| `/generate-testcase <plan-file>` | Generate and execute TypeScript test |
+| `/full-testcase <scenario>` | Complete workflow: plan → generate → execute |
+| `/chunk-testplan <plan-file>` | Split large plans into smaller chunks |
+
+**Business scenario**: Include the URL and what to test. Pass inline or as a file path:
+```
+/plan-testcase Go to https://www.saucedemo.com/ and buy a bike light
+/plan-testcase SAMPLE-BUSINESS_SCENARIOS/sauce-demo-1.txt
+```
 
 ## Running Generated Tests
 
