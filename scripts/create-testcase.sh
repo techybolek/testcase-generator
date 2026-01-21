@@ -8,6 +8,7 @@ set -e
 unset ANTHROPIC_API_KEY
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 if [ -z "$1" ]; then
     echo "Usage: $0 <scenario-file-or-content>"
@@ -31,7 +32,7 @@ else
 fi
 
 # Verify command file exists
-FULL_CMD="$SCRIPT_DIR/.claude/commands/full-testcase.md"
+FULL_CMD="$PROJECT_ROOT/.claude/commands/full-testcase.md"
 
 if [ ! -f "$FULL_CMD" ]; then
     echo "Error: Command file not found: $FULL_CMD"
