@@ -3,3 +3,4 @@ rm -rf test_plans
 rm -rf tests
 rm -rf .playwright-mcp
 rm -rf playwright-report
+rm -rf .playwright-cli/*
