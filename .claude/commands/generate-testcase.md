@@ -154,7 +154,8 @@ After generating the test file:
 When a test fails, use these strategies to fix it:
 
 1. **Selector Issues**:
-   - Use browser MCP tools (browser_snapshot, browser_navigate) to inspect the actual page structure
+   - Use `playwright-cli open <url>` and `playwright-cli snapshot` via the Bash tool to inspect the actual page structure and element refs
+   - Use `playwright-cli screenshot` to visually verify what the page looks like
    - Try alternative selector strategies (role, text, placeholder, CSS)
    - Add `first()` if multiple elements match
    - Use more specific selectors with `{ exact: true }`

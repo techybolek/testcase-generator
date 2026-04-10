@@ -17,11 +17,12 @@ If no business scenario is provided, ask the user:
 
 ### Step 2: Planning Phase (Isolated Context)
 
-Use the **Task tool** to spawn a planning agent with isolated context:
+Use the **Agent tool** to spawn a planning agent with isolated context:
 
 ```
-Task tool parameters:
+Agent tool parameters:
 - subagent_type: "general-purpose"
+- model: "opus"
 - description: "Plan test case"
 - prompt: <see below>
 ```
@@ -43,25 +44,26 @@ First, read the instructions in .claude/commands/plan-testcase.md and follow the
 
 ### Step 3: Generation Phase (Isolated Context)
 
-Use the **Task tool** to spawn a generation agent with isolated context:
+Use the **Agent tool** to spawn an execution agent with isolated context:
 
 ```
-Task tool parameters:
+Agent tool parameters:
 - subagent_type: "general-purpose"
-- description: "Generate and execute test"
+- model: "haiku"
+- description: "Execute test case"
 - prompt: <see below>
 ```
 
 **Agent Prompt:**
 ```
-First, read the instructions in .claude/commands/generate-testcase.md and follow them exactly.
+First, read the instructions in .claude/commands/execute-testcase.md and follow them exactly.
 
 ## Context for this run:
 - Test Plan File: <path from Step 2>
 
 ## Important:
-- Follow ALL instructions from generate-testcase.md including debugging strategies
-- Return your final message with: test file path, status (PASSED/FAILED), iterations needed, fixes made
+- Follow ALL instructions from execute-testcase.md including recovery strategies
+- Return your final message with: status (PASSED/FAILED/PARTIAL), step results summary, any recovery actions taken
 ```
 
 ### Step 4: Final Report

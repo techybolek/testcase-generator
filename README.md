@@ -1,6 +1,6 @@
 # AI-Powered Playwright Test Generator
 
-Generate Playwright tests automatically using Claude Code with the Playwright MCP server.
+Generate Playwright tests automatically using Claude Code with `playwright-cli` (`@playwright/cli`) for token-efficient browser exploration.
 
 ## Prerequisites
 
@@ -11,26 +11,13 @@ npm install
 npx playwright install
 ```
 
-### 2. Install Playwright MCP Server
+### 2. Install Playwright CLI
 
 ```bash
-claude mcp add playwright npx @playwright/mcp@latest
+npm install -g @playwright/cli
 ```
 
-### 3. Configure Headed Mode
-
-For best results the MCP server should run with a visible browser (headed, not headless). Add to your Claude Code MCP config (`~/.claude/mcp.json`):
-
-```json
-{
-  "mcpServers": {
-    "playwright": {
-      "command": "npx",
-      "args": ["@anthropic-ai/mcp-server-playwright", "--headless=false"]
-    }
-  }
-}
-```
+The `playwright-cli` skill at `~/.claude/skills/playwright-cli/SKILL.md` provides Claude Code with the full command reference.
 
 ## Workflow
 
@@ -40,6 +27,7 @@ Use Claude Code slash commands to generate tests:
 |---------|-------------|
 | `/plan-testcase <scenario>` | Explore page and create test plan |
 | `/generate-testcase <plan-file>` | Generate and execute TypeScript test |
+| `/execute-testcase <plan-file>` | LLM executes test plan step-by-step via playwright-cli (resilient, self-healing) |
 | `/full-testcase <scenario>` | Complete workflow: plan → generate → execute |
 | `/chunk-testplan <plan-file>` | Split large plans into smaller chunks |
 

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-AI-powered Playwright test automation framework that uses Claude Code with Playwright MCP server to interactively explore web applications, generate detailed test plans, and auto-generate working TypeScript test code.
+AI-powered Playwright test automation framework that uses Claude Code with `playwright-cli` (`@playwright/cli`) to explore web applications, generate detailed test plans, and auto-generate working TypeScript test code.
 
 ## Commands
 
@@ -32,8 +32,9 @@ npx playwright install      # Install browsers if needed
 
 | Command | Purpose |
 |---------|---------|
-| `/plan-testcase <URL>` | Navigate to URL, explore page with Playwright MCP, create detailed test plan in `test_plans/` |
+| `/plan-testcase <URL>` | Navigate to URL, explore page with `playwright-cli`, create detailed test plan in `test_plans/` |
 | `/generate-test <plan-file>` | Convert test plan to TypeScript, execute with Chromium, auto-fix failures (max 3 retries) |
+| `/execute-testcase <plan-file>` | LLM executes test plan step-by-step via `playwright-cli` — resilient, self-healing, no generated code |
 | `/chunk-testplan <plan-file>` | Split large test plans (>6 independent test cases) into chunks in `test_plans/chunked/<group>/` |
 | `/full-testcase <URL>` | Run complete workflow: plan → generate → execute with context isolation between phases |
 
